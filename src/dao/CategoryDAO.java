@@ -14,7 +14,7 @@ public class CategoryDAO {
     }
 
     // 모든 카테고리 조회
-    public List<CategoryDTO> getAllCategories() throws SQLException {
+    public List<CategoryDTO> getAllCategories() {
         List<CategoryDTO> categories = new ArrayList<>();
         String query = "SELECT * FROM tbl_category";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
@@ -24,6 +24,8 @@ public class CategoryDAO {
                 category.setName(rs.getString("name"));
                 categories.add(category);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return categories;
     }

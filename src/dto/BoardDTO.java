@@ -9,7 +9,7 @@ public class BoardDTO {
     private int bId;
     private String title;
     private String content;
-    private int uId;
+    private String uId;
     private int cateCd;
     private Date instDt;
     private int recommendCount;

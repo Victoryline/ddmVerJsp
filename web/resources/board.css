@@ -1,0 +1,61 @@
+/* board.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #33334a;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #dddddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #33334a;
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    padding: 8px 16px;
+    margin: 0 4px;
+    text-decoration: none;
+    color: #33334a;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #4a4a6a;
+    color: #ffffff;
+}
+
+.pagination span {
+    padding: 8px 16px;
+    margin: 0 4px;
+    background-color: #33334a;
+    color: #ffffff;
+    border-radius: 4px;
+}
