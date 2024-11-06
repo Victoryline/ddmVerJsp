@@ -25,9 +25,10 @@
                     <h2>공지사항</h2>
                     <ul>
                         <c:forEach var="board" items="${requestScope.boardList}">
-                            <li>${board.title}</li>
-                            <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
-
+                            <div class="ul-box">
+                                <li>${board.title}</li>
+                                <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
+                            </div>
                         </c:forEach>
                     </ul>
                 </div>
@@ -37,7 +38,10 @@
                     <h2>자유게시판</h2>
                     <ul>
                         <c:forEach var="board" items="${requestScope.boardList}">
-                            <li>${board.title}</li>
+                            <div class="ul-box">
+                                <li>${board.title}</li>
+                                <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
+                            </div>
                         </c:forEach>
                     </ul>
                 </div>
@@ -49,7 +53,10 @@
                     <h3>최신 댓글</h3>
                     <ul>
                         <c:forEach var="comment" items="${requestScope.recentComments}">
-                            <li>${comment.content}</li>
+                            <div class="ul-box">
+                                <li>${comment.content}</li>
+                                <li>${comment.created.substring(5, 10)}</li>
+                            </div>
                         </c:forEach>
                     </ul>
                 </div>
@@ -57,7 +64,10 @@
                     <h3>인기 댓글</h3>
                     <ul>
                         <c:forEach var="comment" items="${requestScope.topComments}">
-                            <li>${comment.content}</li>
+                            <div class="ul-box">
+                                <li>${comment.content}</li>
+                                <li>${comment.created.substring(5, 10)}</li>
+                            </div>
                         </c:forEach>
                     </ul>
                 </div>
@@ -65,7 +75,11 @@
                     <h3>인기 게시글</h3>
                     <ul>
                         <c:forEach var="board" items="${requestScope.topRecommendedBoards}">
-                            <li>${board.title}</li>
+                            <div class="ul-box">
+                                <li>${board.title}</li>
+                                <li style="text-align: center">${board.recommendCount}</li>
+                                <li><fmt:formatDate value="${board.instDt}" pattern="MM-dd"></fmt:formatDate></li>
+                            </div>
                         </c:forEach>
                     </ul>
                 </div>
