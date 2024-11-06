@@ -16,6 +16,7 @@
 }
 
 .board-items input{
+    border-radius: 10px;
     height: 40px;
     width: 78%;
 }
@@ -25,6 +26,7 @@
     font-size: 1rem;
     height: 40px;
     width: 20%;
+    border-radius: 10px;
 }
 
 .board-items textarea{
@@ -32,11 +34,16 @@
     width: 100%;
     height: 400px;
     min-height: 400px;
+    max-height: 400px;
+    border-radius: 10px;
 }
 
 .board-items input[type=button],
 .board-items input[type=submit]{
+    background-color: rgba(152, 152, 152, 0.33);
     font-size: 1.5rem;
     height: 40px;
     width: 49%;
+    color: white;
+    box-shadow: 5px 5px 5px rgba(187, 187, 187, 0.55);
 }

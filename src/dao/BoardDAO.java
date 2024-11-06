@@ -35,13 +35,12 @@ public class BoardDAO {
 
     // 게시글 추가
     public boolean addBoard(BoardDTO board) throws SQLException {
-        String query = "INSERT INTO tbl_borad (title, content, u_id, cate_cd, inst_dt) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_borad (title, content, u_id, cate_cd) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, board.getTitle());
             pstmt.setString(2, board.getContent());
             pstmt.setInt(3, board.getUId());
             pstmt.setInt(4, board.getCateCd());
-            pstmt.setString(5, board.getInstDt());
             return pstmt.executeUpdate() > 0;
         }
     }
