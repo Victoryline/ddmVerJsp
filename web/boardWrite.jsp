@@ -27,6 +27,8 @@
         }
     %>
     <%
+
+        int cate_cd = Integer.parseInt(request.getParameter("cate_cd"));
         CategoryDAO cateDao = new CategoryDAO();
         List<CategoryDTO> cateList = cateDao.getAllCategories();
     %>
@@ -40,9 +42,15 @@
                     <div class="board-items">
                         <select name="cate_cd" class="required" data-title="카테고리">
                             <option value="">카테고리 선택</option>
-                            <c:forEach var="cate" varStatus="status" items="<%= cateList%>">
-                                <option value="${cate.cateCd}">${cate.name}</option>
-                            </c:forEach>
+                            <%
+                                if (cateList != null) {
+                                    for (CategoryDTO cate : cateList) {
+                            %>
+                            <option <%if (cate_cd == cate.getCateCd()) {%> selected <%}%> value="<%= cate.getCateCd() %>"><%= cate.getName() %></option>
+                            <%
+                                    }
+                                }
+                            %>
                         </select>
                         <input type="text" name="title" class="required" data-title="제목">
                     </div>
