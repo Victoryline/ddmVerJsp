@@ -36,9 +36,9 @@ public class BoardDAO {
     public BoardDTO getBoardById(int bId) throws SQLException {
         BoardDTO board = new BoardDTO();
         String query = "SELECT * FROM tbl_borad WHERE b_id=?";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, bId);
-            try (ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, bId);
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     board.setBId(rs.getInt("b_id"));
                     board.setTitle(rs.getString("title"));

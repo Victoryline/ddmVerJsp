@@ -1,42 +1,66 @@
 <%@ page import="dao.BoardDAO" %>
-<%@ page import="java.sql.SQLException" %><%--
-  Created by IntelliJ IDEA.
-  User: GGG
-  Date: 2024-11-06
-  Time: 오후 12:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="dto.BoardDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="layout/header.jsp" %>
 <html>
 <head>
     <title>글제목 끌어오기</title>
+    <link rel="stylesheet" href="resources/index.css">
+    <link rel="stylesheet" type="text/css" href="resources/detailPage.css"/>
 </head>
 <body>
-    현재 파라매터: ${requestScope.b_id}
+<div class="page-wrapper">
+    <div class="main-container">
+        <%
+            //String bid = request.getParameter("b_id");
+            String bid = "1";
+            BoardDAO bDao = new BoardDAO();
+            try {
+                BoardDTO bDto = bDao.getBoardById(Integer.parseInt(bid));
+                pageContext.setAttribute("bDto", bDto);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        %>
+        <div class="category quarter-margin-bottom">
+            현재 카테고리: ${bDto.cateCd}
+        </div>
 
-    <%
-        String bid = request.getParameter("b_id");
-        BoardDAO bDao = new BoardDAO();
-        try {
-            bDao.getBoardById(Integer.parseInt(bid));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    %>
+        <div class="sub-header quarter-margin-bottom">
+            <div class="title"><h2>${bDto.title}</h2></div>
+            <div class="between-info">
+                <div>유저 명: ${bDto.BId}</div>
+                <div>${bDto.instDt}</div>
+            </div>
+            <hr>
+        </div>
 
-    <jsp:useBean id="bDto" class="dto.BoardDTO"/>
-    <jsp:setProperty name="bDto" property="bId" value=""/>
-    <jsp:setProperty name="bDto" property="title" value=""/>
-    <jsp:setProperty name="bDto" property="content" value=""/>
-    <jsp:setProperty name="bDto" property="uId" value=""/>
-    <jsp:setProperty name="bDto" property="cateCd" value=""/>
-    <jsp:setProperty name="bDto" property="instDt" value=""/>
+        <div class="main-content">
+            ${bDto.content}
+        </div>
 
-    ${bDto.bId}<br>
-    ${bDto.title}<br>
-    ${bDto.content}<br>
-    ${bDto.uId}<br>
-    ${bDto.cateCd}<br>
-    ${bDto.instDt}<br>
+        <div class="recommend-set between-info">
+            <div class="recommend-button-set">
+                <div class="like-amount">추천 횟수</div>
+                <button>추천</button>
+            </div>
+            <div class="recommend-button-set">
+                <div class="dislike-amount">비추천 횟수</div>
+                <button>비추천</button>
+            </div>
+        </div>
+
+        <hr style="margin-bottom: 10px; margin-top: 10px;">
+
+        <div class="comment-set">
+            <div class="comment-count">
+                전체 댓글 수: <span>00</span> 개
+            </div>
+
+        </div>
+    </div>
+    <%@ include file="layout/footer.jsp" %>
+</div>
 </body>
 </html>
