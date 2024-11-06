@@ -5,6 +5,7 @@
 <%
     String userName = (String) session.getAttribute("id");
 %>
+<%@ include file="dark.jsp" %>
 
 <header style="background-color: #2a2a3c; color: #ffffff; padding: 20px 0; text-align: center; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); position: relative;">
     <h1 style="font-size: 2em; font-weight: bold; color: #f4f4f9; margin: 0;">게시판 메인 페이지</h1>

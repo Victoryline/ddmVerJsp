@@ -52,6 +52,7 @@
 
     /* 다크 모드 전환 버튼 */
     .dark-mode-toggle {
+        z-index: 999999;
         width: 50px;
         height: 50px;
         position: absolute;
@@ -65,6 +66,7 @@
     }
 
     body.dark-mode .dark-mode-toggle {
+        z-index: 999999;
         width: 50px;
         height: 50px;
         position: absolute;
