@@ -47,7 +47,6 @@
                 </div>
             </div>
 
-            <!-- 최신댓글 -->
             <div class="additional-content">
                 <div class="content-card">
                     <h3>최신 댓글</h3>
@@ -88,4 +87,6 @@
             <%@ include file="layout/footer.jsp" %>
         </div>
     </body>
+    <script src="resources/js/index.js"></script>
+
 </html>
