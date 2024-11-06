@@ -21,30 +21,31 @@
     <body>
         <div class="page-wrapper">
             <div class="board-write">
-                <form>
+                <div>
                     <div class="board-title">
                         <h1>게시물 작성</h1>
                     </div>
                     <div class="board-items">
-                        <select name="cate_cd">
+                        <select name="cate_cd" class="required" data-title="카테고리">
                             <option value="">카테고리 선택</option>
                             <c:forEach var="cate" varStatus="status" items="<%= cateList%>">
                                 <option value="${cate.cateCd}">${cate.name}</option>
                             </c:forEach>
                         </select>
-                        <input type="text" name="title">
+                        <input type="text" name="title" class="required" data-title="제목">
                     </div>
                     <div class="board-items">
-                        <textarea name="content"></textarea>
+                        <textarea name="content" class="required" data-title="내용"></textarea>
                     </div>
                     <div class="board-items">
-                        <input type="submit" value="작성완료">
-                        <input type="button" value="뒤로가기">
+                        <input type="submit" value="작성완료" id="sub-btn">
+                        <input type="button" value="뒤로가기" id="back-btn">
                     </div>
-                </form>
-
+                </div>
             </div>
             <%@ include file="layout/footer.jsp" %>
         </div>
     </body>
 </html>
+
+<script type="text/javascript" src="resources/js/boardWrite.js"></script>
