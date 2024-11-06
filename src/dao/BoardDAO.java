@@ -45,7 +45,7 @@ public class BoardDAO {
                     board.setContent(rs.getString("content"));
                     board.setUId(rs.getInt("u_id"));
                     board.setCateCd(rs.getInt("cate_cd"));
-                    board.setInstDt(rs.getString("inst_dt"));
+                    board.setInstDt(rs.getDate("inst_dt"));
                 }
             }
         }

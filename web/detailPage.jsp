@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>글제목 끌어오기</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="resources/index.css">
     <link rel="stylesheet" type="text/css" href="resources/detailPage.css"/>
 </head>
@@ -62,5 +63,51 @@
     </div>
     <%@ include file="layout/footer.jsp" %>
 </div>
+<script>
+    $(function(){
+        $(".like-amount").click(function(){
+            let param = {
+                u_id: ${sessionScope.user.user_id},
+                b_id: ${bDto.BId},
+                rec_gen: "G",
+                inst_dt: "DEFAULT"
+            }
+            $.ajax({
+                url:'RecommendUpdateServlet',
+                data: param,
+                type: 'POST',
+                dataType:'json',
+                success:function(resData){
+                    EditLike(resData);
+                }
+            })
+        })
+
+        $(".dislike-amount").click(function(){
+            let param = {
+                u_id: ${sessionScope.user.user_id},
+                b_id: ${bDto.BId},
+                rec_gen: "B",
+                inst_dt: "DEFAULT"
+            }
+            $.ajax({
+                url:'RecommendUpdateServlet',
+                data: param,
+                type: 'POST',
+                dataType:'json',
+                success:function(resData){
+                    EditLike(resData);
+                }
+            })
+        })
+    })
+
+    function EditLike(resData){
+        let objResData = JSON.parse(resData);
+        $('#like-amount').text(objResData.likeAmount);
+        $('#dislike-amount').text(objResData.dislikeAmount);
+    }
+
+</script>
 </body>
 </html>
