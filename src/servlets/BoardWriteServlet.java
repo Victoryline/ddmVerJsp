@@ -21,14 +21,19 @@ public class BoardWriteServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
 
+        HttpSession session = request.getSession();
+        String u_id = session.getAttribute("id").toString();
+
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setTitle(request.getParameter("title"));
         boardDTO.setContent(request.getParameter("content"));
         boardDTO.setCateCd(Integer.parseInt(request.getParameter("cate_cd")));
+        boardDTO.setUId(u_id);
 
         BoardDAO boardDAO = new BoardDAO();
         boolean result = boardDAO.addBoard(boardDTO);
 
+        System.out.println("aaa");
         PrintWriter out = response.getWriter();
         out.println(result);
     }
