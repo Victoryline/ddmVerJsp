@@ -15,7 +15,6 @@ public class DBConn {
 
     private DBConn() {
         try {
-            
             Class.forName(DRIVER_NAME);
             this.conn = DriverManager.getConnection(url, username, password);
             System.out.println("드라이버에 연결 되었습니다");

@@ -26,7 +26,7 @@ public class BoardDAO {
                 board.setContent(rs.getString("content"));
                 board.setUId(rs.getInt("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
-                board.setInstDt(rs.getString("inst_dt"));
+                board.setInstDt(rs.getDate("inst_dt"));
                 boards.add(board);
             }
         }
@@ -54,13 +54,12 @@ public class BoardDAO {
 
     // 게시글 추가
     public boolean addBoard(BoardDTO board) throws SQLException {
-        String query = "INSERT INTO tbl_borad (title, content, u_id, cate_cd, inst_dt) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO tbl_borad (title, content, u_id, cate_cd) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, board.getTitle());
             pstmt.setString(2, board.getContent());
             pstmt.setInt(3, board.getUId());
             pstmt.setInt(4, board.getCateCd());
-            pstmt.setString(5, board.getInstDt());
             return pstmt.executeUpdate() > 0;
         }
     }
@@ -92,7 +91,7 @@ public class BoardDAO {
      */
     public List<BoardDTO> getTenBoards() throws SQLException {
         List<BoardDTO> boards = new ArrayList<>();
-        String query = "SELECT * FROM tbl_board ORDER BY inst_dt DESC LIMIT 10";
+        String query = "SELECT * FROM tbl_borad ORDER BY inst_dt DESC LIMIT 10";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 BoardDTO board = new BoardDTO();
@@ -101,7 +100,7 @@ public class BoardDAO {
                 board.setContent(rs.getString("content"));
                 board.setUId(rs.getInt("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
-                board.setInstDt(rs.getString("inst_dt"));
+                board.setInstDt(rs.getDate("inst_dt"));
                 boards.add(board);
             }
         }
@@ -109,7 +108,7 @@ public class BoardDAO {
     }
 
     /**
-     * 추천순 게시글 조회
+     * 추천순 게시글 조회 5개조회
      */
     public List<BoardDTO> getTopRecommendedBoards() throws SQLException {
         List<BoardDTO> boards = new ArrayList<>();
@@ -119,7 +118,7 @@ public class BoardDAO {
                         "LEFT JOIN tbl_recommend r ON b.b_id = r.b_id " +
                         "GROUP BY b.b_id " +
                         "ORDER BY recommend_count DESC " +
-                        "LIMIT 10";
+                        "LIMIT 5";
 
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -129,13 +128,32 @@ public class BoardDAO {
                 board.setContent(rs.getString("content"));
                 board.setUId(rs.getInt("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
-                board.setInstDt(rs.getString("inst_dt"));
-                // Assuming BoardDTO has a recommendCount field and setter
+                board.setInstDt(rs.getDate("inst_dt"));
                 board.setRecommendCount(rs.getInt("recommend_count"));
                 boards.add(board);
             }
         }
         return boards;
     }
+
+    // 공지사항 게시글 조회
+    public List<BoardDTO> getNoticeBoards() throws SQLException {
+        List<BoardDTO> boards = new ArrayList<>();
+        String query = "SELECT * FROM tbl_borad WHERE cate_cd = 1 ORDER BY inst_dt DESC"; // cate_cd = 1은 공지사항 카테고리
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                BoardDTO board = new BoardDTO();
+                board.setBId(rs.getInt("b_id"));
+                board.setTitle(rs.getString("title"));
+                board.setContent(rs.getString("content"));
+                board.setUId(rs.getInt("u_id"));
+                board.setCateCd(rs.getInt("cate_cd"));
+                board.setInstDt(rs.getDate("inst_dt"));
+                boards.add(board);
+            }
+        }
+        return boards;
+    }
+
 
 }
