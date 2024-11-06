@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="gson-2.10.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/fillJar/gson-2.10.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/fillJar/jsp-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/fillJar/jstl-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/fillJar/lombok-1.18.34.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/fillJar/mariadb-java-client-3.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/fillJar/servlet-api.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
