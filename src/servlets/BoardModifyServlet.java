@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/boardWrite")
+@WebServlet("/boardModify")
 public class BoardModifyServlet extends HttpServlet {
 
     @SneakyThrows
@@ -28,7 +28,7 @@ public class BoardModifyServlet extends HttpServlet {
         boardDTO.setCateCd(Integer.parseInt(request.getParameter("cate_cd")));
 
         BoardDAO boardDAO = new BoardDAO();
-        boolean result = boardDAO.addBoard(boardDTO);
+        boolean result = boardDAO.updateBoard(boardDTO);
 
         PrintWriter out = response.getWriter();
         out.println(result);

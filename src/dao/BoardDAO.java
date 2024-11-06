@@ -33,6 +33,27 @@ public class BoardDAO {
         return boards;
     }
 
+    // 게시글 조회
+    public BoardDTO getBoard(int b_id) throws SQLException {
+        BoardDTO board = null;
+        String query = "SELECT * FROM tbl_borad WHERE b_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, b_id); // 쿼리 매개변수를 먼저 설정합니다.
+            try (ResultSet rs = stmt.executeQuery()) { // executeQuery() 호출 시 매개변수 없음
+                if (rs.next()) {
+                    board = new BoardDTO();
+                    board.setBId(rs.getInt("b_id"));
+                    board.setTitle(rs.getString("title"));
+                    board.setContent(rs.getString("content"));
+                    board.setUId(rs.getString("u_id"));
+                    board.setCateCd(rs.getInt("cate_cd"));
+                    board.setInstDt(rs.getDate("inst_dt"));
+                }
+            }
+        }
+        return board;
+    }
+
     // 게시글 추가
     public boolean addBoard(BoardDTO board) throws SQLException {
         String query = "INSERT INTO tbl_borad (title, content, u_id, cate_cd) VALUES (?, ?, ?, ?)";
