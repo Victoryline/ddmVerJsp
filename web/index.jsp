@@ -24,7 +24,7 @@
                 <div class="board">
                     <h2>공지사항</h2>
                     <ul>
-                        <c:forEach var="board" items="${requestScope.boardList}">
+                        <c:forEach var="board" items="${requestScope.noticeList}">
                             <div class="ul-box">
                                 <li>${board.title}</li>
                                 <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
