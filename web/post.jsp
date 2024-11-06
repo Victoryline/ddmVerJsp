@@ -8,17 +8,17 @@
     <title>글제목 끌어오기</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="resources/index.css">
-    <link rel="stylesheet" type="text/css" href="resources/detailPage.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/post.css"/>
 </head>
 <body>
 <div class="page-wrapper">
     <div class="main-container">
+
         <%
-            //String bid = request.getParameter("b_id");
-            String bid = "1";
+            String bid = request.getParameter("b_id");
             BoardDAO bDao = new BoardDAO();
             try {
-                BoardDTO bDto = bDao.getBoardById(Integer.parseInt(bid));
+                BoardDTO bDto = bDao.getBoard(Integer.parseInt(bid));
                 pageContext.setAttribute("bDto", bDto);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -44,11 +44,11 @@
         <div class="recommend-set between-info">
             <div class="recommend-button-set">
                 <div class="like-amount">추천 횟수</div>
-                <button>추천</button>
+                <button class="like-button">추천</button>
             </div>
             <div class="recommend-button-set">
                 <div class="dislike-amount">비추천 횟수</div>
-                <button>비추천</button>
+                <button class="dislike-button">비추천</button>
             </div>
         </div>
 
@@ -65,36 +65,50 @@
 </div>
 <script>
     $(function(){
-        $(".like-amount").click(function(){
-            let param = {
-                u_id: ${sessionScope.user.user_id},
-                b_id: ${bDto.BId},
-                rec_gen: "G",
-                inst_dt: "DEFAULT"
+        $.ajax({
+            url:'RecommendUpdateServlet',
+            data: {b_id:${bDto.BId}},
+            type: 'GET',
+            dataType:'text',
+            success:function(resData){
+                EditLike(resData);
             }
+
+        })
+        $(".like-button").click(function(){
+            let param = {
+                u_id: "${sessionScope.user.UId}",
+                b_id: "${bDto.BId}",
+                rec_gbn: "G"
+            }
+
+            console.log(param);
+
             $.ajax({
                 url:'RecommendUpdateServlet',
                 data: param,
-                type: 'POST',
-                dataType:'json',
+                type: 'GET',
+                dataType:'text',
                 success:function(resData){
                     EditLike(resData);
                 }
             })
         })
 
-        $(".dislike-amount").click(function(){
+        $(".dislike-button").click(function(){
             let param = {
-                u_id: ${sessionScope.user.user_id},
-                b_id: ${bDto.BId},
-                rec_gen: "B",
-                inst_dt: "DEFAULT"
+                u_id: "${sessionScope.user.UId}",
+                b_id: "${bDto.BId}",
+                rec_gbn: "B"
             }
+
+            console.log(param);
+
             $.ajax({
                 url:'RecommendUpdateServlet',
                 data: param,
-                type: 'POST',
-                dataType:'json',
+                type: 'GET',
+                dataType:'text',
                 success:function(resData){
                     EditLike(resData);
                 }
@@ -104,8 +118,8 @@
 
     function EditLike(resData){
         let objResData = JSON.parse(resData);
-        $('#like-amount').text(objResData.likeAmount);
-        $('#dislike-amount').text(objResData.dislikeAmount);
+        $('.like-amount').html(objResData.likeAmount);
+        $('.dislike-amount').html(objResData.dislikeAmount);
     }
 
 </script>

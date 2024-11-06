@@ -13,12 +13,13 @@ public class RecommendDAO {
 
     // 추천 추가
     public boolean addRecommendation(RecommendDTO recommend) throws SQLException {
-        String query = "INSERT INTO tbl_recommend (u_id, b_id, rec_gbn, inst_dt) VALUES (?, ?, ?, ?)";
+        System.out.println("나와라예");
+        System.out.println(recommend.toString());
+        String query = "INSERT INTO tbl_recommend (u_id, b_id, rec_gbn) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, recommend.getUId());
             pstmt.setInt(2, recommend.getBId());
             pstmt.setString(3, recommend.getRec_gbn());
-            pstmt.setString(4, recommend.getInstDt());
             return pstmt.executeUpdate() > 0;
         }
     }
