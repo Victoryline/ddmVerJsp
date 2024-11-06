@@ -32,6 +32,25 @@ public class BoardDAO {
         return boards;
     }
 
+    public BoardDTO getBoardById(int bId) throws SQLException {
+        BoardDTO board = new BoardDTO();
+        String query = "SELECT * FROM tbl_borad WHERE b_id=?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, bId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    board.setBId(rs.getInt("b_id"));
+                    board.setTitle(rs.getString("title"));
+                    board.setContent(rs.getString("content"));
+                    board.setUId(rs.getInt("u_id"));
+                    board.setCateCd(rs.getInt("cate_cd"));
+                    board.setInstDt(rs.getString("inst_dt"));
+                }
+            }
+        }
+        return board;
+    }
+
     // 게시글 추가
     public boolean addBoard(BoardDTO board) throws SQLException {
         String query = "INSERT INTO tbl_borad (title, content, u_id, cate_cd, inst_dt) VALUES (?, ?, ?, ?, ?)";
