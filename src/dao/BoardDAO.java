@@ -24,7 +24,7 @@ public class BoardDAO {
                 board.setBId(rs.getInt("b_id"));
                 board.setTitle(rs.getString("title"));
                 board.setContent(rs.getString("content"));
-                board.setUId(rs.getInt("u_id"));
+                board.setUId(rs.getString("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
                 board.setInstDt(rs.getDate("inst_dt"));
                 boards.add(board);
@@ -39,7 +39,7 @@ public class BoardDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, board.getTitle());
             pstmt.setString(2, board.getContent());
-            pstmt.setInt(3, board.getUId());
+            pstmt.setString(3, board.getUId());
             pstmt.setInt(4, board.getCateCd());
             return pstmt.executeUpdate() > 0;
         }
@@ -51,7 +51,7 @@ public class BoardDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, board.getTitle());
             pstmt.setString(2, board.getContent());
-            pstmt.setInt(3, board.getUId());
+            pstmt.setString(3, board.getUId());
             pstmt.setInt(4, board.getCateCd());
             pstmt.setInt(5, board.getBId());
             return pstmt.executeUpdate() > 0;
@@ -79,7 +79,7 @@ public class BoardDAO {
                 board.setBId(rs.getInt("b_id"));
                 board.setTitle(rs.getString("title"));
                 board.setContent(rs.getString("content"));
-                board.setUId(rs.getInt("u_id"));
+                board.setUId(rs.getString("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
                 board.setInstDt(rs.getDate("inst_dt"));
                 boards.add(board);
@@ -107,7 +107,7 @@ public class BoardDAO {
                 board.setBId(rs.getInt("b_id"));
                 board.setTitle(rs.getString("title"));
                 board.setContent(rs.getString("content"));
-                board.setUId(rs.getInt("u_id"));
+                board.setUId(rs.getString("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
                 board.setInstDt(rs.getDate("inst_dt"));
                 board.setRecommendCount(rs.getInt("recommend_count"));
@@ -127,13 +127,51 @@ public class BoardDAO {
                 board.setBId(rs.getInt("b_id"));
                 board.setTitle(rs.getString("title"));
                 board.setContent(rs.getString("content"));
-                board.setUId(rs.getInt("u_id"));
+                board.setUId(rs.getString("u_id"));
                 board.setCateCd(rs.getInt("cate_cd"));
                 board.setInstDt(rs.getDate("inst_dt"));
                 boards.add(board);
             }
         }
         return boards;
+    }
+
+    // 특정 카테고리의 게시글 조회 (페이징 포함)
+    public List<BoardDTO> getBoardsByCategory(int cateCd, int offset, int limit) throws SQLException {
+        List<BoardDTO> boards = new ArrayList<>();
+        String query = "SELECT * FROM tbl_borad WHERE cate_cd = ? ORDER BY inst_dt DESC LIMIT ? OFFSET ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, cateCd);
+            pstmt.setInt(2, limit);
+            pstmt.setInt(3, offset);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    BoardDTO board = new BoardDTO();
+                    board.setBId(rs.getInt("b_id"));
+                    board.setTitle(rs.getString("title"));
+                    board.setContent(rs.getString("content"));
+                    board.setUId(rs.getString("u_id"));
+                    board.setCateCd(rs.getInt("cate_cd"));
+                    board.setInstDt(rs.getDate("inst_dt"));
+                    boards.add(board);
+                }
+            }
+        }
+        return boards;
+    }
+
+    // 총 게시글 수 조회
+    public int getBoardCountByCategory(int cateCd) throws SQLException {
+        String query = "SELECT COUNT(*) AS count FROM tbl_borad WHERE cate_cd = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, cateCd);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("count");
+                }
+            }
+        }
+        return 0;
     }
 
 

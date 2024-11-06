@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="layout/header.jsp" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
@@ -83,7 +83,6 @@
                     </ul>
                 </div>
             </div>
-
             <%@ include file="layout/footer.jsp" %>
         </div>
     </body>
