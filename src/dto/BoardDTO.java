@@ -10,4 +10,5 @@ public class BoardDTO {
     private int uId;
     private int cateCd;
     private String instDt;
+    private int recommendCount;
 }
