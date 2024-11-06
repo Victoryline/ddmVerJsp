@@ -34,7 +34,7 @@
                 <ul>
                     <c:forEach var="board" items="${requestScope.noticeList}">
                         <div class="ul-box">
-                            <li>${board.title}</li>
+                            <a href="post.jsp?b_id=${board.BId}"><li> ${board.title}</li></a>
                             <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
                         </div>
                     </c:forEach>
@@ -47,7 +47,7 @@
                 <ul>
                     <c:forEach var="board" items="${requestScope.boardList}">
                         <div class="ul-box">
-                            <li>${board.title}</li>
+                            <a href="post.jsp?b_id=${board.BId}"><li> ${board.title}</li></a>
                             <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
                         </div>
                     </c:forEach>
@@ -83,8 +83,7 @@
                 <ul>
                     <c:forEach var="board" items="${requestScope.topRecommendedBoards}">
                         <div class="ul-box">
-                            <li>${board.title}</li>
-                            <li style="text-align: center">${board.recommendCount}</li>
+                            <a href="post.jsp?b_id=${board.BId}"><li> ${board.title}</li></a>
                             <li><fmt:formatDate value="${board.instDt}" pattern="MM-dd"></fmt:formatDate></li>
                         </div>
                     </c:forEach>
