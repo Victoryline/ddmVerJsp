@@ -9,7 +9,7 @@ public class DBConn {
     private Connection conn;
 
     private static final String DRIVER_NAME = "org.mariadb.jdbc.Driver";
-    private String url = "jdbc:mariadb://localhost:3306/mydb";
+    private String url = "jdbc:mariadb://localhost:3306/ddmjsp";
     private String username = "root";
     private String password = "1234";
 
