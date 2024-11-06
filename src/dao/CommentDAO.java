@@ -68,7 +68,6 @@ public class CommentDAO {
                 comment.setContent(rs.getString("content"));
                 comment.setCreated(rs.getString("created"));
                 comments.add(comment);
-                System.out.println(rs.getString("content"));
             }
         }
         return comments;
