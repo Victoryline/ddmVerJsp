@@ -29,3 +29,4 @@ $(function () {
         rainbowText(this);
     });
 });
+
