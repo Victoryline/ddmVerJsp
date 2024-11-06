@@ -50,6 +50,8 @@
                                value="<%= boardDTO.getTitle()%>">
                         <input type="hidden" name="b_id" class="required" data-title="게시글번호"
                                value="<%= boardDTO.getBId()%>">
+                        <input type="hidden" name="u_id" class="required" data-title="작성자"
+                               value="<%= boardDTO.getUId()%>">
                     </div>
                     <div class="board-items">
                         <textarea name="content" class="required" data-title="내용"><%= boardDTO.getContent()%></textarea>

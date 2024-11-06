@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -23,14 +24,22 @@ public class BoardModifyServlet extends HttpServlet {
 
         BoardDTO boardDTO = new BoardDTO();
         boardDTO.setBId(Integer.parseInt(request.getParameter("b_id")));
+        boardDTO.setUId(request.getParameter("u_id"));
         boardDTO.setTitle(request.getParameter("title"));
         boardDTO.setContent(request.getParameter("content"));
         boardDTO.setCateCd(Integer.parseInt(request.getParameter("cate_cd")));
 
+        PrintWriter out = response.getWriter();
+
+        HttpSession session = request.getSession();
+        if(session.getAttribute("id") != boardDTO.getUId()) {
+            out.println(false);
+            return;
+        }
+
         BoardDAO boardDAO = new BoardDAO();
         boolean result = boardDAO.updateBoard(boardDTO);
 
-        PrintWriter out = response.getWriter();
         out.println(result);
     }
 }
