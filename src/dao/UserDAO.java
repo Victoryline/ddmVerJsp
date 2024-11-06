@@ -11,6 +11,24 @@ public class UserDAO {
         this.conn = DBConn.getInstance().getConnection();
     }
 
+    public boolean isUserIdDuplicate(String userId) {
+        String query = "SELECT COUNT(*) FROM tbl_user WHERE u_id = ?";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, userId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // 해당 아이디가 존재하면 true 반환
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false; // 존재하지 않으면 false 반환
+    }
+
     public UserDTO authenticate(String username, String password) {
         String query = "SELECT u_id, name, email FROM tbl_user WHERE u_id = ? AND pw = ?";
 

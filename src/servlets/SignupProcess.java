@@ -18,6 +18,8 @@ public class SignupProcess extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        request.setCharacterEncoding("UTF-8");
+
         String userId = request.getParameter("u_id"); // 사용자 ID
         String name = request.getParameter("name");   // 사용자 이름
         String password = request.getParameter("pw"); // 비밀번호

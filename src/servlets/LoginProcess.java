@@ -17,6 +17,8 @@ public class LoginProcess extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
 
+        request.setCharacterEncoding("UTF-8");
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
