@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="dto.CategoryDTO" %>
 <%@ page import="dao.CategoryDAO" %>
+<%@ page import="dao.BoardDAO" %>
+<%@ page import="dto.BoardDTO" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="layout/header.jsp" %>
@@ -10,11 +12,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>게시글 작성</title>
+        <title>게시글 수정</title>
         <link rel="stylesheet" href="resources/index.css">
         <link rel="stylesheet" href="resources/boardWrite.css">
     </head>
     <%
+        int b_no = Integer.parseInt(request.getParameter("b_no"));
+        BoardDAO boardDAO = new BoardDAO();
+        BoardDTO boardDTO = boardDAO.getBoard(b_no);
+
         CategoryDAO cateDao = new CategoryDAO();
         List<CategoryDTO> cateList = cateDao.getAllCategories();
     %>
@@ -26,16 +32,20 @@
                         <h1>게시물 작성</h1>
                     </div>
                     <div class="board-items">
-                        <select name="cate_cd" class="required" data-title="카테고리">
-                            <option value="">카테고리 선택</option>
-                            <c:forEach var="cate" varStatus="status" items="<%= cateList%>">
-                                <option value="${cate.cateCd}">${cate.name}</option>
-                            </c:forEach>
-                        </select>
-                        <input type="text" name="title" class="required" data-title="제목">
+                        <%
+                            if (cateList != null) {
+                                for (CategoryDTO cate : cateList) {
+                        %>
+                        <option <%if (b_no == cate.getCateCd()){%> selected <%}%> value="<%= cate.getCateCd() %>"><%= cate.getName() %></option>
+                        <%
+                                }
+                            }
+                        %>
+                        <input type="text" name="title" class="required" data-title="제목" value="<%= boardDTO.getTitle()%>">
+                        <input type="hidden" name="b_no" class="required" data-title="게시글번호" value="<%= boardDTO.getBId()%>">
                     </div>
                     <div class="board-items">
-                        <textarea name="content" class="required" data-title="내용"></textarea>
+                        <textarea name="content" class="required" data-title="내용"><%= boardDTO.getContent()%></textarea>
                     </div>
                     <div class="board-items">
                         <input type="submit" value="작성완료" id="sub-btn">
@@ -48,4 +58,4 @@
     </body>
 </html>
 
-<script type="text/javascript" src="resources/js/boardWrite.js"></script>
+<script type="text/javascript" src="resources/js/boardModify.js"></script>
