@@ -35,7 +35,8 @@ $(function () {
         get: {
             dataInfo: function () {
                 return {
-                    b_cd: document.querySelector("input[name=b_no]").value,
+                    b_id: document.querySelector("input[name=b_id]").value,
+                    u_id: document.querySelector("input[name=u_id]").value,
                     cate_cd: document.querySelector("select[name=cate_cd]").value,
                     title: document.querySelector("input[name=title]").value,
                     content: document.querySelector("textarea[name=content]").value
