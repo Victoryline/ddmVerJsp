@@ -17,6 +17,18 @@
         <link rel="stylesheet" href="resources/boardWrite.css">
     </head>
     <%
+        if (session.getAttribute("id") == null) {
+
+    %>
+    <script>
+        alert("로그인해야 이용 할 수 있습니다.");
+        location.href = "login.jsp";
+    </script>
+    <%
+        }
+    %>
+
+    <%
         int b_id = Integer.parseInt(request.getParameter("b_id"));
         BoardDAO boardDAO = new BoardDAO();
         BoardDTO boardDTO = boardDAO.getBoard(b_id);
