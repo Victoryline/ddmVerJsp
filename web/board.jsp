@@ -25,7 +25,7 @@
 
     <!-- 새 글 쓰기 버튼 -->
     <div class="top-controls">
-        <button class="write-button" onclick="location.href='boardWrite.jsp'">새 글 쓰기</button>
+        <button class="write-button" onclick="location.href='boardWrite.jsp?cate_cd=${param.cate_cd}'">새 글 쓰기</button>
     </div>
 
     <c:set var="cateCd" value="${param.cate_cd != null ? param.cate_cd : 0}" scope="page"/>
