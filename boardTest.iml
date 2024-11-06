@@ -22,6 +22,6 @@
     <orderEntry type="library" exported="" name="gson-2.10.1" level="project" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="Java-WebSocket-1.5.7" level="project" />
-    <orderEntry type="library" name="javax.websocket-api-1.1" level="project" />
+    <orderEntry type="library" name="Java-WebSocket-1.5.8" level="project" />
   </component>
 </module>

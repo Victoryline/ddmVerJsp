@@ -3,6 +3,7 @@
 <%@ page import="dao.BoardDAO" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="dto.UserDTO" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="layout/header.jsp" %>
@@ -96,7 +97,7 @@
     <script src="resources/js/index.js"></script>
     <script>
         let ws;
-        const userName = "익명" + Math.floor(Math.random() * 10000);
+        let userName = "<%= session.getAttribute("user") != null ? ((UserDTO) session.getAttribute("user")).getName() : "익명" + Math.floor(Math.random() * 10000) %>";
 
         function connectWebSocket() {
             ws = new WebSocket("ws://localhost:8080/chat");
