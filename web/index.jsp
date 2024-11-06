@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <!-- Additional Section for Latest and Popular Content -->
+            <!-- 최신댓글 -->
             <div class="additional-content">
                 <div class="content-card">
                     <h3>최신 댓글</h3>

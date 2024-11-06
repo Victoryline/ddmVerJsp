@@ -1,7 +1,8 @@
 package dao;
 
-import dto.BoardDTO;
 import db.DBConn;
+import dto.BoardDTO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,4 +86,56 @@ public class BoardDAO {
             return pstmt.executeUpdate() > 0;
         }
     }
+
+    /**
+     * 게시글 최신 조회 10개
+     */
+    public List<BoardDTO> getTenBoards() throws SQLException {
+        List<BoardDTO> boards = new ArrayList<>();
+        String query = "SELECT * FROM tbl_board ORDER BY inst_dt DESC LIMIT 10";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                BoardDTO board = new BoardDTO();
+                board.setBId(rs.getInt("b_id"));
+                board.setTitle(rs.getString("title"));
+                board.setContent(rs.getString("content"));
+                board.setUId(rs.getInt("u_id"));
+                board.setCateCd(rs.getInt("cate_cd"));
+                board.setInstDt(rs.getString("inst_dt"));
+                boards.add(board);
+            }
+        }
+        return boards;
+    }
+
+    /**
+     * 추천순 게시글 조회
+     */
+    public List<BoardDTO> getTopRecommendedBoards() throws SQLException {
+        List<BoardDTO> boards = new ArrayList<>();
+        String query =
+                "SELECT b.*, COUNT(r.b_id) AS recommend_count " +
+                        "FROM tbl_borad b " +
+                        "LEFT JOIN tbl_recommend r ON b.b_id = r.b_id " +
+                        "GROUP BY b.b_id " +
+                        "ORDER BY recommend_count DESC " +
+                        "LIMIT 10";
+
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                BoardDTO board = new BoardDTO();
+                board.setBId(rs.getInt("b_id"));
+                board.setTitle(rs.getString("title"));
+                board.setContent(rs.getString("content"));
+                board.setUId(rs.getInt("u_id"));
+                board.setCateCd(rs.getInt("cate_cd"));
+                board.setInstDt(rs.getString("inst_dt"));
+                // Assuming BoardDTO has a recommendCount field and setter
+                board.setRecommendCount(rs.getInt("recommend_count"));
+                boards.add(board);
+            }
+        }
+        return boards;
+    }
+
 }
