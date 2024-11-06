@@ -21,21 +21,19 @@
 </head>
 <body>
 <h1>게시글 목록</h1>
-
-<c:set var="cateCd" value="${param.cate_cd != null ? param.cate_cd : 0}" scope="page" />
-<c:set var="currentPage" value="${param.page != null ? param.page : 1}" scope="page" />
-<c:set var="pageSize" value="10" scope="page" />
-<c:set var="offset" value="${(currentPage - 1) * pageSize}" scope="page" />
+<c:set var="cateCd" value="${param.cate_cd != null ? param.cate_cd : 0}" scope="page"/>
+<c:set var="currentPage" value="${param.page != null ? param.page : 1}" scope="page"/>
+<c:set var="pageSize" value="2" scope="page"/>
+<c:set var="offset" value="${(currentPage - 1) * pageSize}" scope="page"/>
 
 <c:if test="${cateCd > 0}">
-    <jsp:useBean id="boardDAO" class="dao.BoardDAO" scope="page" />
-    <c:set var="boards" value="${boardDAO.getBoardsByCategory(cateCd, offset, pageSize)}" />
-    <c:set var="totalBoardCount" value="${boardDAO.getBoardCountByCategory(cateCd)}" />
-    <c:set var="totalPages" value="${(totalBoardCount / pageSize) + (totalBoardCount % pageSize == 0 ? 0 : 1)}" />
-
+    <jsp:useBean id="boardDAO" class="dao.BoardDAO" scope="page"/>
+    <c:set var="boards" value="${boardDAO.getBoardsByCategory(cateCd, offset, pageSize)}"/>
+    <c:set var="totalBoardCount" value="${boardDAO.getBoardCountByCategory(cateCd)}"/>
+    <c:set var="totalPages" value="${(totalBoardCount / pageSize) + (totalBoardCount % pageSize == 0 ? 0 : 1)}"/>
     <c:choose>
         <c:when test="${empty boards}">
-            <p>해당 카테고리에 게시글이 없습니다.</p>
+            <h3 style="text-align: center">해당 카테고리에 게시글이 없습니다.</h3>
         </c:when>
         <c:otherwise>
             <table>
@@ -76,7 +74,7 @@
                     </c:choose>
                 </c:forEach>
 
-                <c:if test="${currentPage < totalPages}">
+                <c:if test='<%= Integer.parseInt(pageContext.getAttribute("currentPage").toString()) < Math.floor(Double.parseDouble(pageContext.getAttribute("totalPages").toString()))%>'>
                     <a href="board.jsp?cate_cd=${cateCd}&page=${currentPage + 1}">다음</a>
                 </c:if>
             </div>

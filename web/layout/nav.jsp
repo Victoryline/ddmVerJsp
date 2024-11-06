@@ -20,7 +20,7 @@
     <ul>
         <li><a href="/">홈</a></li>
         <c:forEach var="category" items="<%= new CategoryDAO().getAllCategories()%>">
-            <li><a href="../board.jsp?cate_cd=${category.cateCd}">${category.name}</a></li>
+            <li><a href="../board.jsp?cate_cd=${category.cateCd}&page=1">${category.name}</a></li>
         </c:forEach>
     </ul>
 </nav>
