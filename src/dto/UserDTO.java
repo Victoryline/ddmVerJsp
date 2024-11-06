@@ -1,7 +1,11 @@
 package dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class UserDTO {
     private String uId;
@@ -9,4 +13,16 @@ public class UserDTO {
     private String email;
     private String pw;
     private String instDt;
+
+    public UserDTO(String uId, String name, String email) {
+        this.uId = uId;
+        this.name = name;
+        this.email = email;
+    }
+    public UserDTO(String uId, String name, String email, String pw) {
+        this.uId = uId;
+        this.name = name;
+        this.email = email;
+        this.pw = pw;
+    }
 }

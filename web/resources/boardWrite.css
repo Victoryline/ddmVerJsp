@@ -1,0 +1,42 @@
+.board-write{
+    margin: 0 auto;
+    text-align: center;
+    width: 70%;
+    height: 83vh;
+}
+
+.board-items{
+    padding-top: 10px;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: 20%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.board-items input{
+    height: 40px;
+    width: 78%;
+}
+
+.board-items select{
+    text-align: center;
+    font-size: 1rem;
+    height: 40px;
+    width: 20%;
+}
+
+.board-items textarea{
+    min-width: 100%;
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+}
+
+.board-items input[type=button],
+.board-items input[type=submit]{
+    font-size: 1.5rem;
+    height: 40px;
+    width: 49%;
+}
