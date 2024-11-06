@@ -1,6 +1,13 @@
+<%@ page import="dto.BoardDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dao.BoardDAO" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.Arrays" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="layout/header.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
     <head>
@@ -11,22 +18,17 @@
     </head>
     <body>
         <div class="page-wrapper">
-            <!-- Main Container for Boards -->
+
             <div class="container">
                 <!-- 공지사항 섹션 -->
                 <div class="board">
                     <h2>공지사항</h2>
                     <ul>
-                        <li>공지사항 게시판 - 게시글 1</li>
-                        <li>공지사항 게시판 - 게시글 2</li>
-                        <li>공지사항 게시판 - 게시글 3</li>
-                        <li>공지사항 게시판 - 게시글 4</li>
-                        <li>공지사항 게시판 - 게시글 5</li>
-                        <li>공지사항 게시판 - 게시글 6</li>
-                        <li>공지사항 게시판 - 게시글 7</li>
-                        <li>공지사항 게시판 - 게시글 8</li>
-                        <li>공지사항 게시판 - 게시글 9</li>
-                        <li>공지사항 게시판 - 게시글 10</li>
+                        <c:forEach var="board" items="${requestScope.boardList}">
+                            <li>${board.title}</li>
+                            <li><fmt:formatDate value="${board.instDt}" pattern="yyyy-MM-dd"></fmt:formatDate></li>
+
+                        </c:forEach>
                     </ul>
                 </div>
 
@@ -34,16 +36,9 @@
                 <div class="board">
                     <h2>자유게시판</h2>
                     <ul>
-                        <li>자유게시판 - 게시글 1</li>
-                        <li>자유게시판 - 게시글 2</li>
-                        <li>자유게시판 - 게시글 3</li>
-                        <li>자유게시판 - 게시글 4</li>
-                        <li>자유게시판 - 게시글 5</li>
-                        <li>자유게시판 - 게시글 6</li>
-                        <li>자유게시판 - 게시글 7</li>
-                        <li>자유게시판 - 게시글 8</li>
-                        <li>자유게시판 - 게시글 9</li>
-                        <li>자유게시판 - 게시글 10</li>
+                        <c:forEach var="board" items="${requestScope.boardList}">
+                            <li>${board.title}</li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -53,31 +48,25 @@
                 <div class="content-card">
                     <h3>최신 댓글</h3>
                     <ul>
-                        <li>댓글 1 - 게시글 제목</li>
-                        <li>댓글 2 - 게시글 제목</li>
-                        <li>댓글 3 - 게시글 제목</li>
-                        <li>댓글 4 - 게시글 제목</li>
-                        <li>댓글 5 - 게시글 제목</li>
+                        <c:forEach var="comment" items="${requestScope.recentComments}">
+                            <li>${comment.content}</li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="content-card">
                     <h3>인기 댓글</h3>
                     <ul>
-                        <li>인기 댓글 1 - 게시글 제목</li>
-                        <li>인기 댓글 2 - 게시글 제목</li>
-                        <li>인기 댓글 3 - 게시글 제목</li>
-                        <li>인기 댓글 4 - 게시글 제목</li>
-                        <li>인기 댓글 5 - 게시글 제목</li>
+                        <c:forEach var="comment" items="${requestScope.topComments}">
+                            <li>${comment.content}</li>
+                        </c:forEach>
                     </ul>
                 </div>
                 <div class="content-card">
                     <h3>인기 게시글</h3>
                     <ul>
-                        <li>인기 게시글 1</li>
-                        <li>인기 게시글 2</li>
-                        <li>인기 게시글 3</li>
-                        <li>인기 게시글 4</li>
-                        <li>인기 게시글 5</li>
+                        <c:forEach var="board" items="${requestScope.topRecommendedBoards}">
+                            <li>${board.title}</li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>

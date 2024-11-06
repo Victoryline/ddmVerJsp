@@ -2,6 +2,8 @@ package dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class BoardDTO {
     private int bId;
@@ -9,6 +11,6 @@ public class BoardDTO {
     private String content;
     private int uId;
     private int cateCd;
-    private String instDt;
+    private Date instDt;
     private int recommendCount;
 }
