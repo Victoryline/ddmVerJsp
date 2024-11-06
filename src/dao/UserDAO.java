@@ -56,15 +56,16 @@ public class UserDAO {
     }
 
     // 사용자 등록
-    public boolean addUser(UserDTO user) throws SQLException {
-        String query = "INSERT INTO tbl_user (u_id, name, email, pw, inst_dt) VALUES (?, ?, ?, ?, ?)";
+    public boolean addUser(UserDTO user) {
+        String query = "INSERT INTO tbl_user (u_id, name, email, pw) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setString(1, user.getUId());
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getPw());
-            pstmt.setString(5, user.getInstDt());
             return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

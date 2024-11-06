@@ -16,14 +16,13 @@
 }
 
 .board-items input{
-    font-size: 1.5rem;
     height: 40px;
     width: 78%;
 }
 
 .board-items select{
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     height: 40px;
     width: 20%;
 }
