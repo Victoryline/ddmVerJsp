@@ -97,10 +97,10 @@
     <script src="resources/js/index.js"></script>
     <script>
         let ws;
-        let userName = "<%= session.getAttribute("user") != null ? ((UserDTO) session.getAttribute("user")).getName() : "익명" + Math.floor(Math.random() * 10000) %>";
+        let userName = "<%= session.getAttribute("user") != null ? ((UserDTO) session.getAttribute("user")).getName() : "익명" + ((int) (Math.random() * 10000)) %>";
 
         function connectWebSocket() {
-            ws = new WebSocket("ws://localhost:8080/chat");
+            ws = new WebSocket("ws://192.168.0.250:8080/chat");
 
             ws.onopen = function () {
                 console.log("소켓 연동 성공일세");
