@@ -54,4 +54,48 @@ public class CommentDAO {
             return pstmt.executeUpdate() > 0;
         }
     }
+
+    // 최근 댓글 가져오기
+    public List<CommentDTO> getRecentComments() throws SQLException {
+        List<CommentDTO> comments = new ArrayList<>();
+        String query = "SELECT * FROM tbl_comment ORDER BY created DESC LIMIT 5";
+        try (PreparedStatement pstmt = conn.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                CommentDTO comment = new CommentDTO();
+                comment.setCId(rs.getInt("c_id"));
+                comment.setBId(rs.getInt("b_id"));
+                comment.setUId(rs.getString("u_id"));
+                comment.setContent(rs.getString("content"));
+                comment.setCreated(rs.getString("created"));
+                comments.add(comment);
+                System.out.println(rs.getString("content"));
+            }
+        }
+        return comments;
+    }
+
+    // 인기 댓글 가져오기
+    public List<CommentDTO> getTopComments() throws SQLException {
+        List<CommentDTO> comments = new ArrayList<>();
+        String query = """
+                SELECT c.*, COUNT(r.b_id) AS recommend_count
+                FROM tbl_comment c
+                LEFT JOIN tbl_recommend r ON c.b_id = r.b_id
+                GROUP BY c.c_id
+                ORDER BY recommend_count DESC, c.created DESC
+                LIMIT 5
+                """;
+        try (PreparedStatement pstmt = conn.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                CommentDTO comment = new CommentDTO();
+                comment.setCId(rs.getInt("c_id"));
+                comment.setBId(rs.getInt("b_id"));
+                comment.setUId(rs.getString("u_id"));
+                comment.setContent(rs.getString("content"));
+                comment.setCreated(rs.getString("created"));
+                comments.add(comment);
+            }
+        }
+        return comments;
+    }
 }
