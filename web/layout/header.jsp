@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <%
-    String userName = (String) session.getAttribute("name");
+    String userName = (String) session.getAttribute("id");
 %>
 
 <header style="background-color: #2a2a3c; color: #ffffff; padding: 20px 0; text-align: center; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); position: relative;">
@@ -15,8 +15,10 @@
             if (userName != null) {
         %>
         <!-- 로그인 상태 -->
-        <span style="color: #a5a5ff; margin-right: 15px; font-weight: 500; font-size: 1.1em;">반갑습니다, <%= userName %>님</span>
-        <a href="logout.jsp" style="color: #ff4d4d; background-color: #33334a; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background 0.3s, color 0.3s;">
+<%--
+        <span style="color: #a5a5ff; margin-right: 15px; font-weight: 500; font-size: 1.1em;">반갑습니다, ${sessionScope.user.name}님</span>
+--%>
+        <a href="login.jsp" style="color: #ff4d4d; background-color: #33334a; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background 0.3s, color 0.3s;">
             로그아웃
         </a>
         <%
