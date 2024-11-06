@@ -74,7 +74,6 @@ nav a:hover {
     gap: 30px;
 }
 
-
 /* 게시판 스타일 */
 .board {
     width: 50%;
@@ -102,19 +101,24 @@ nav a:hover {
     list-style-type: none;
 }
 
-.board li {
+.board .ul-box li {
     padding: 12px 0;
     color: #b0b0d4;
-    border-bottom: 1px solid #444;
     transition: color 0.3s ease;
 }
 
-.board li:hover {
+.board .ul-box li:hover {
     color: #ffffff;
 }
 
-.board li:last-child {
+.board .ul-box:last-child {
     border-bottom: none;
+}
+
+.board .ul-box{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #444;
 }
 
 /* 추가 컨텐츠 스타일 */
@@ -151,18 +155,43 @@ nav a:hover {
 
 .content-card ul {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-.content-card li {
-    padding: 8px 0;
+.content-card .ul-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Aligns items vertically */
+    padding: 8px 0; /* Adds space between rows */
+    border-bottom: 1px solid #444; /* Adds a border between items */
+    transition: background 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.content-card .ul-box:hover {
+    background-color: #33334a; /* Highlight the row on hover */
+}
+
+.content-card .ul-box li {
+    flex: 1;
     color: #b0b0d4;
-    transition: color 0.3s ease;
+    margin: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.content-card li:hover {
-    color: #ffffff;
+.content-card .ul-box li:first-child {
+    flex: 2;
 }
 
+.content-card .ul-box li:last-child {
+    text-align: right;
+}
+
+.content-card .ul-box:last-child {
+    border-bottom: none;
+}
 /* Footer 스타일 */
 footer {
     background-color: #2a2a3c;
@@ -171,8 +200,6 @@ footer {
     padding: 20px;
     font-size: 0.9em;
     border-top: 1px solid #444;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 
