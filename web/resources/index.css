@@ -5,6 +5,10 @@
     font-family: 'Roboto', Arial, sans-serif;
 }
 
+a {
+    text-decoration-line: none;
+}
+
 /* 다크 테마 배경 및 텍스트 색상 */
 body {
     background-color: #1e1e2f;
