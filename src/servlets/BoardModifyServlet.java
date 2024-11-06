@@ -22,7 +22,7 @@ public class BoardModifyServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 
         BoardDTO boardDTO = new BoardDTO();
-        boardDTO.setBId(Integer.parseInt(request.getParameter("bId")));
+        boardDTO.setBId(Integer.parseInt(request.getParameter("b_id")));
         boardDTO.setTitle(request.getParameter("title"));
         boardDTO.setContent(request.getParameter("content"));
         boardDTO.setCateCd(Integer.parseInt(request.getParameter("cate_cd")));

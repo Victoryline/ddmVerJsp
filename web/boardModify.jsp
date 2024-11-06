@@ -39,7 +39,7 @@
                                     for (CategoryDTO cate : cateList) {
                             %>
                             <option <%if (boardDTO.getCateCd() == cate.getCateCd()) {%> selected <%}%>
-                                                                                        value="<%= cate.getCateCd() %>"><%= cate.getName() %>
+                                                value="<%= cate.getCateCd() %>"><%= cate.getName() %>
                             </option>
                             <%
                                     }
@@ -48,7 +48,7 @@
                         </select>
                         <input type="text" name="title" class="required" data-title="제목"
                                value="<%= boardDTO.getTitle()%>">
-                        <input type="hidden" name="b_no" class="required" data-title="게시글번호"
+                        <input type="hidden" name="b_id" class="required" data-title="게시글번호"
                                value="<%= boardDTO.getBId()%>">
                     </div>
                     <div class="board-items">
