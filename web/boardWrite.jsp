@@ -58,6 +58,9 @@
                         <textarea name="content" class="required" data-title="내용"></textarea>
                     </div>
                     <div class="board-items">
+                        <input type="file" name="file">
+                    </div>
+                    <div class="board-items">
                         <input type="submit" value="작성완료" id="sub-btn">
                         <input type="button" value="뒤로가기" id="back-btn">
                     </div>

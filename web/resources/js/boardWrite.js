@@ -15,10 +15,9 @@ $(function () {
 
         let param = func.get.dataInfo();
         console.log(param);
-
         axios.post('/boardWrite', param, {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                "Content-Type": "multipart/form-data",
             }
         }).then((res) => {
             if (res.data) {
@@ -34,11 +33,15 @@ $(function () {
     let func = {
         get: {
             dataInfo: function () {
-                return {
-                    cate_cd: document.querySelector("select[name=cate_cd]").value,
-                    title: document.querySelector("input[name=title]").value,
-                    content: document.querySelector("textarea[name=content]").value
-                };
+
+                const formData = new FormData();
+
+                formData.append("files", document.querySelector("input[name=file]").files[0]);
+                formData.append("cate_cd", document.querySelector("select[name=cate_cd]").value);
+                formData.append("title", document.querySelector("input[name=title]").value);
+                formData.append("content", document.querySelector("textarea[name=content]").value);
+
+                return formData;
             }
         },
         set: {
